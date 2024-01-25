@@ -58,9 +58,9 @@ export default function Register() {
         return
       }
       console.log(err)
-    }
-    finally {
+    } finally {
       toast.success(`Bem vindo ${data.username}`)
+      await router.push('/register/connect-calendar')
     }
   }
   return (
