@@ -12,6 +12,9 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import { api } from '@/src/lib/axios'
+import { toast } from 'react-toastify'
+import { AxiosError } from 'axios'
 
 const registerFormSchemas = z.object({
   username: z
@@ -44,7 +47,21 @@ export default function Register() {
   }, [router.query?.username, setValue])
 
   async function handleRegister(data: RegisterFormData) {
-    console.log(data)
+    try {
+      await api.post('/users', {
+        name: data.name,
+        username: data.username,
+      })
+    } catch (err) {
+      if (err instanceof AxiosError && err.response?.data?.message) {
+        toast.error(err.response.data.message)
+        return
+      }
+      console.log(err)
+    }
+    finally {
+      toast.success(`Bem vindo ${data.username}`)
+    }
   }
   return (
     <Container>
@@ -75,7 +92,7 @@ export default function Register() {
             <FormError size="sm">{errors.name.message}</FormError>
           )}
         </label>
-        <Button type="submit">
+        <Button type="submit" disabled={isSubmitting}>
           Próximo passo
           <ArrowRight />
         </Button>
