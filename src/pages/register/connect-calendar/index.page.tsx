@@ -1,12 +1,12 @@
 import { Button, Heading, MultiStep, Text } from '@tonho-ignite-ui/react'
 import { Container, Header } from '../styles'
 import { ArrowRight, Check } from 'phosphor-react'
-import { ConnectBox, ConnectItem, Error } from './styles'
+import { ConnectBox, ConnectItem } from './styles'
 import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
 
-export default function Register() {
+export default function ConnectCalendar() {
   const session = useSession()
   const router = useRouter()
   const hasAuthError = !!router.query.error // transformar em boolean
