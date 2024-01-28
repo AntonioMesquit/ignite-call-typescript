@@ -11,13 +11,14 @@ model User {
   id         String   @id @default(uuid())
   username   String   @unique
   name       String
+  bio        String?
   email      String?  @unique
   avatar_url String?
   created_at DateTime @default(now())
 
-  accounts         Account[]
-  sessions         Session[]
-  UserTimeInterval UserTimeInterval[]
+  accounts      Account[]
+  sessions      Session[]
+  timeIntervals UserTimeInterval[]
 
   @@map("users")
 }
@@ -57,7 +58,9 @@ model UserTimeInterval {
   week_day              Int
   time_start_in_minutes Int
   time_end_in_minutes   Int
-  user                  User   @relation(fields: [userId], references: [id])
+  user                  User   @relation(fields: [user_id], references: [id])
 
-  userId String
+  user_id String
+
+  @@map("user_time_intervals")
 }
