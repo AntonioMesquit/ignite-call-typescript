@@ -3,6 +3,7 @@ import { Container, Hero, Preview } from './styles'
 import PreviewImage from '../../assets/apppreview.png'
 import Image from 'next/image'
 import { ClaimUsernameForm } from './components/ClaimUsernameForm'
+import { Calendar } from '@/src/components/Calendar'
 export default function Home() {
   return (
     <Container>
