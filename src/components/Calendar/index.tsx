@@ -102,6 +102,7 @@ export function Calendar({ onDataSelected, selectDate }: CalendarProps) {
     )
     return calendarWeeks
   }, [currentDate])
+
   return (
     <Container>
       <CalendarHeader>
